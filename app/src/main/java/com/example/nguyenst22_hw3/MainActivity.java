@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          Resource:
          https://stackoverflow.com/questions/28071349/
          the-specified-child-already-has-a-parent-you-must-call-removeview-on-the-chil
-         Solution: I used the solutions provided
+         Solution: I used the solution provided
          */
 
         if (view1.getParent() != null)
