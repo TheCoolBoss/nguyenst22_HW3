@@ -319,58 +319,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Swaps the position of two buttons
      * Used as a helper method
+     * This method currently does not work successfully
+     * when called from move
      * @param gl: GridLayout to act on
      * @param view1: First View to swap
      * @param view2: Second View to swap
      */
     public void swapButtons(androidx.gridlayout.widget.GridLayout gl, View view1, View view2)
     {
-        int index1 = 0;
-        int index2 = 0;
-        for (int i = 0; i < gl.getChildCount(); i++)
-        {
-            if (gl.getChildAt(i) == view1)
-            {
-                index1 = i;
-            }
+        /**
+         External Citation
+         Date: 5 November 2019
+         Problem: My original algorithm generated an error that said
+         that the view already had a parent and removeView() had to be
+         called on its parent
+         Resource:
+         https://stackoverflow.com/questions/28071349/
+         the-specified-child-already-has-a-parent-you-must-call-removeview-on-the-chil
+         Solution: I used the solutions provided
+         */
 
-            if (gl.getChildAt(i) == view2)
-            {
-                index2 = i;
-            }
+        if (view1.getParent() != null)
+        {
+            ((ViewGroup) view1.getParent()).removeView(view1);
         }
 
-        gl.removeAllViews();
+        gl.addView(view1, gl.indexOfChild(view2));
 
-        for (int i = 0; i < gl.getChildCount(); i++)
+        if (view2.getParent() != null)
         {
-            if (buttonList[i] != view1 || buttonList[i] != view2)
-            {
-                gl.addView(buttonList[i], i);
-            }
-
-            else
-            {
-                gl.addView(view1, index2);
-                gl.addView(view2, index1);
-            }
+            ((ViewGroup) view2.getParent()).removeView(view2);
         }
 
-        //https://stackoverflow.com/questions/28071349/the-specified-child-already-has-a-parent-you-must-call-removeview-on-the-chil
-        //11/5
-//        if (view1.getParent() != null)
-//        {
-//            ((ViewGroup) view1.getParent()).removeView(view1);
-//        }
-//
-//        gl.addView(view1, gl.indexOfChild(view2));
-//
-//        if (view2.getParent() != null)
-//        {
-//            ((ViewGroup) view2.getParent()).removeView(view2);
-//        }
-//
-//        gl.addView(view2, gl.indexOfChild(view1));
+        gl.addView(view2, gl.indexOfChild(view1));
 
     }
 
