@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Set buttonList such that buttons
         //are placed in order
-        //See if there's a shorter way
-        //(for loop?)
         buttonList[0] = one;
         buttonList[1] = two;
         buttonList[2] = three;
@@ -177,10 +175,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //if empty spot is adjacent, several checks are
         //needed
 
+        //These checks first check the position of the index
+        //of the button that is not blank, then check if the
+        //blank button index is adjacent to it, then swaps them
+        //if so. Adjacency depends on the position of the button.
+
         //Top left corner
         if (index == 0)
         {
-            if (blankIndex == 1 || blankIndex == 4)
+            if (blankIndex == index + 1 || blankIndex == index + 4)
             {
                 swapButtons(gl, gl.getChildAt(index),gl.getChildAt(blankIndex));
             }
@@ -189,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Top right corner
         else if (index == 3)
         {
-            if (blankIndex == 2 || blankIndex == 7)
+            if (blankIndex == index - 1 || blankIndex == index + 4)
             {
                 swapButtons(gl, gl.getChildAt(index),gl.getChildAt(blankIndex));
             }
@@ -198,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Bottom left corner
         else if (index == 12)
         {
-            if (blankIndex == 13 || blankIndex == 8)
+            if (blankIndex == index + 1 || blankIndex == index - 4)
             {
                 swapButtons(gl, gl.getChildAt(index),gl.getChildAt(blankIndex));
             }
@@ -207,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Bottom right corner
         else if (index == 15)
         {
-            if (blankIndex == 14 || blankIndex == 11)
+            if (blankIndex == index - 1 || blankIndex == index - 4)
             {
                 swapButtons(gl, gl.getChildAt(index),gl.getChildAt(blankIndex));
             }
